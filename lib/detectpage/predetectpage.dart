@@ -25,8 +25,8 @@ class MyPreDetectState extends State<MyPreDetectPage> {
 
   final String vectorOlo = 'lib/splashpage/assets/Frame_Olo.svg';
   final String vectorColorex = 'lib/splashpage/assets/Vector_Colorex.svg';
-
   final FirebaseStorage _storage = FirebaseStorage.instance;
+
 
   Future<void> compressAndUploadFile(File file) async {
     XFile? compressedFile = await (FlutterImageCompress.compressAndGetFile(
@@ -77,12 +77,12 @@ class MyPreDetectState extends State<MyPreDetectPage> {
     });
     if (mounted) {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => MyResultPage(
-                    output: '${output![0]['label']}',
-                    image: _imageFile!,
-                  )));
+        context,
+        MaterialPageRoute(
+          builder: (context) => MyResultPage(
+            output: '${output![0]['label']}',
+            image: _imageFile!,
+          )));
     }
   }
 

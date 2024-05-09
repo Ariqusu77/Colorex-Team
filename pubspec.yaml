@@ -49,6 +49,8 @@ dependencies:
   google_sign_in: ^6.2.1
   provider: ^6.1.2
   cloud_firestore: ^4.17.2
+  camera: ^0.10.6
+  crypto: ^3.0.3
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +79,12 @@ flutter:
     - assets/img/g_logo.png
     - assets/svg/apple_icon.svg
     - assets/svg/Olo_Olo.svg
+    - assets/svg/Olo_Olo_Flip.svg
+    - assets/svg/LO_LO.svg
+    - assets/svg/Bookmark.svg
+    - assets/svg/Chat.svg
+    - assets/svg/Like.svg
+    - assets/svg/Send.svg
     - lib/homepage/asset/svg/Vector_Community.svg
     - lib/homepage/asset/svg/Vector_Bookmark.svg
     - lib/homepage/asset/svg/Vector_Chat.svg

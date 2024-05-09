@@ -7,9 +7,6 @@ class MyChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Nested ListView Example'),
-        ),
         body: ListView.builder(
           itemCount: 9, // Number of vertical items
           itemBuilder: (context, index) {
@@ -35,6 +32,11 @@ class MyChatPage extends StatelessWidget {
             );
           },
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Theme.of(context).primaryColor,
+          child: const Icon(Icons.add),
+          ),
       ),
     );
   }

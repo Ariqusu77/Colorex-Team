@@ -7,7 +7,7 @@ class MyUserData extends ChangeNotifier {
   String? displayName;
   String? photoURL;
   String season = 'Your season';
-
+  
   int follower = 0;
   int post = 0;
   int review = 0;
@@ -15,6 +15,7 @@ class MyUserData extends ChangeNotifier {
   List<DocumentReference> followerList = [];
   List<DocumentReference> postList = [];
   List<DocumentReference> reviewList = [];
+  List<DocumentReference> bookmark = [];
 
   void loadUserData(Map<String, dynamic> userData) {
     userID = userData['User_ID'] ?? userID;
@@ -30,6 +31,7 @@ class MyUserData extends ChangeNotifier {
     followerList = userData['Follower_List'] ?? followerList;
     postList = userData['Post_List'] ?? postList;
     reviewList = userData['Review_List'] ?? reviewList;
+    bookmark = userData['Bookmark'] ?? bookmark;
 
     notifyListeners();
   }
@@ -47,6 +49,7 @@ class MyUserData extends ChangeNotifier {
       'Follower_List': followerList.map((ref) => ref.id).toList(),
       'Post_List': postList.map((ref) => ref.id).toList(),
       'Review_List': reviewList.map((ref) => ref.id).toList(),
+      'Bookmark': bookmark.map((ref) => ref.id).toList(),
     };
   }
 }

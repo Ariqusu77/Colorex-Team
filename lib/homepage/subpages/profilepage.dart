@@ -67,20 +67,20 @@ class MyProfilePage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   (username != null)
-                                      ? const Text('#Username')
-                                      : const Text('#B-Version'),
+                                      ? Text('#$username')
+                                      : const Text('#Username'),
                                 ]),
                           ],
                         ),
                         //),
                       ),
                       const Spacer(),
-                      const Row(
+                     Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            '#Your Season',
-                            style: TextStyle(
+                            userDataProvider.season,
+                            style: const TextStyle(
                               fontSize: 18,
                             ),
                           )

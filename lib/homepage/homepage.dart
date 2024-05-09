@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'subpages/communitypage.dart';
+import 'subpages/homepage.dart';
 //import 'subpages/feedpage.dart';
 // import 'subpages/bookmarkpage.dart';
-// import 'subpages/chatpage.dart';
+import 'subpages/chatpage.dart';
 import 'subpages/profilepage.dart';
 import 'subpages/testpage.dart';
 import 'package:colorex/testwidget/usertest.dart';
 
 import 'package:colorex/detectpage/predetectpage.dart';
+import 'package:colorex/communitypage/communitypage.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -37,11 +38,12 @@ class MyHomePageState extends State<MyHomePage> {
     MyCommunityPage(),
     MyPreDetectPage(),
     // MyBookmarkPage(),
-    // MyChatPage(),
+    //MyChatPage(),
+    MyCommunityFeedPage(),
     MyProfilePage(),
     MyTestPage(),
     MyUserTest(),
-    
+
     Text('My Community'),
     Text('My Bookmark'),
     Text('My Chat'),
@@ -58,6 +60,7 @@ class MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -99,10 +102,10 @@ class MyHomePageState extends State<MyHomePage> {
               icon: SvgPicture.asset(vectorKamera, height: 25),
               label: 'Persona',
             ),
-            // BottomNavigationBarItem(
-            //   icon: SvgPicture.asset(vectorChat, height: 25),
-            //   label: 'Community',
-            // ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(vectorChat, height: 25),
+              label: 'Community',
+            ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(vectorUser, height: 25),
               label: 'Profile',

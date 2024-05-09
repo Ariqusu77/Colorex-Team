@@ -125,43 +125,31 @@ class MyCostumTextFieldPassword extends StatefulWidget {
       _MyCostumTextFieldPasswordState();
 }
 
-class _MyCostumTextFieldPasswordState extends State<MyCostumTextFieldPassword>
-    with SingleTickerProviderStateMixin {
+class _MyCostumTextFieldPasswordState extends State<MyCostumTextFieldPassword> {
   bool showPass = true;
   final double fontSize = 18;
   final double topPad = 12;
   final double bottomPad = 4;
-  final String vectorOlo = "assets/svg/Olo_Olo.svg";
-
-  late AnimationController _controller;
-  late Animation<double> _animation;
+  final String vectorOlo = "assets/svg/Olo_Olo_Flip.svg";
+  final String vectorUlu = "assets/svg/LO_LO.svg";
+  late String vectorUsed;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
+    vectorUsed = vectorUlu;
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _animate() {
+  void showAndHide() {
     if (showPass) {
-      _controller.forward();
       setState(() {
-        showPass = false;
+        showPass = !showPass;
+        vectorUsed = vectorOlo;
       });
     } else {
-      _controller.reverse();
       setState(() {
-        showPass = true;
+        showPass = !showPass;
+        vectorUsed = vectorUlu;
       });
     }
     // start the animation
@@ -246,25 +234,16 @@ class _MyCostumTextFieldPasswordState extends State<MyCostumTextFieldPassword>
                     cursorHeight: 20,
                   ),
                 ),
+                const SizedBox(
+                  width: 6,
+                ),
                 GestureDetector(
                   onTap: () {
-                    _animate();
+                    showAndHide();
                   },
-                  child: AnimatedBuilder(
-                    animation: _controller,
-                    builder: (context, child) {
-                      return Transform(
-                        alignment: Alignment.center,
-                        transform: Matrix4.identity()
-                          ..setEntry(3, 2, 0.001) // perspective
-                          ..rotateY(
-                              _animation.value * 3.141), // horizontal flip
-                        child: SvgPicture.asset(
-                          vectorOlo,
-                          height: 18,
-                        ),
-                      );
-                    },
+                  child: SvgPicture.asset(
+                    vectorUsed,
+                    width: 28,
                   ),
                 ),
               ],

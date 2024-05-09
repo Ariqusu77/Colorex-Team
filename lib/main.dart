@@ -11,6 +11,7 @@ import 'loginpage/subpages/loginpage.dart';
 import 'loginpage/subpages/signuppage.dart';
 
 import 'model/user.dart';
+import 'model/post.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => MyUserData()),
+        ChangeNotifierProvider(create: (context) => MyPostDataManager())
       ],
       child: const MyApp(), 
     ),

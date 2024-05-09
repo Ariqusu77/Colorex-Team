@@ -1,3 +1,4 @@
+import 'package:colorex/model/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,11 +6,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:colorex/widget/costum_button.dart';
 import 'package:colorex/loginpage/subpages/usernamepage.dart';
+import 'package:provider/provider.dart';
 
 class MySignUpModal extends StatelessWidget {
   const MySignUpModal({super.key});
 
-  void signUpWithGoogle(BuildContext context) async {
+  void signUpWithGoogle(
+      BuildContext context, MyUserData userDataProvider) async {
     try {
       // ignore: no_leading_underscores_for_local_identifiers
       FirebaseAuth _auth = FirebaseAuth.instance;
@@ -28,10 +31,14 @@ class MySignUpModal extends StatelessWidget {
         if (kDebugMode) {
           print('User signed up with Google: ${user.displayName}');
         }
+        userDataProvider.displayName = user.displayName;
+        userDataProvider.userID = user.uid;
+        userDataProvider.photoURL = user.photoURL;
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
         // ignore: use_build_context_synchronously
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MyUserNamePage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const MyUserNamePage()));
       } else {
         if (kDebugMode) {
           print('User already exists or sign in unsuccessful.');
@@ -46,6 +53,8 @@ class MySignUpModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userDataProvider = Provider.of<MyUserData>(context);
+
     return Center(
         child: Column(
       children: [
@@ -63,7 +72,7 @@ class MySignUpModal extends StatelessWidget {
           buttonColor: Colors.white,
           buttonText: 'Continue with Google',
           func: () {
-            signUpWithGoogle(context);
+            signUpWithGoogle(context, userDataProvider);
           },
         ),
         const SizedBox(
@@ -80,7 +89,7 @@ class MySignUpModal extends StatelessWidget {
         GestureDetector(
           onTap: () {
             Navigator.pop(context);
-            Navigator.pushNamed(context, '/signup' );
+            Navigator.pushNamed(context, '/signup');
           },
           child: Text(
             'Sign up with Email',
