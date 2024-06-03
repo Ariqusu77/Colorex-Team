@@ -1,14 +1,14 @@
-import 'dart:io';
+// import 'dart:io';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:tflite/tflite.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'dart:async';
-
-import 'detectpage.dart';
+// import 'package:image_picker/image_picker.dart';
+// import 'package:tflite/tflite.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:flutter_image_compress/flutter_image_compress.dart';
+// import 'dart:async';
+import 'rulespage.dart';
+// import 'detectpage.dart';
 import 'package:colorex/widget/costum_button.dart';
 
 class MyPreDetectPage extends StatefulWidget {
@@ -18,85 +18,83 @@ class MyPreDetectPage extends StatefulWidget {
 }
 
 class MyPreDetectState extends State<MyPreDetectPage> {
-  var _modelLoaded = false;
-  File? _imageFile;
-  // ignore: unused_field
-  List? _output;
+//  var _modelLoaded =  false;
+//   File? _imageFile;
+  // // ignore: unused_field
+  // List? _output;
 
   final String vectorOlo = 'lib/splashpage/assets/Frame_Olo.svg';
   final String vectorColorex = 'lib/splashpage/assets/Vector_Colorex.svg';
-  final FirebaseStorage _storage = FirebaseStorage.instance;
+  // final FirebaseStorage _storage = FirebaseStorage.instance;
 
+  // Future<void> compressAndUploadFile(File file) async {
+  //   XFile? compressedFile = await (FlutterImageCompress.compressAndGetFile(
+  //     file.path,
+  //     '${file.path}_compressed.jpg', // Change the extension if necessary
+  //     quality: 60, // Adjust the quality as needed (0 to 100)
+  //   ));
+  //   File imageFile = File(compressedFile!.path);
+  //   Reference ref = _storage
+  //       .ref()
+  //       .child('dataset/${DateTime.now().millisecondsSinceEpoch}');
+  //   ref.putFile(imageFile);
+  // }
 
-  Future<void> compressAndUploadFile(File file) async {
-    XFile? compressedFile = await (FlutterImageCompress.compressAndGetFile(
-      file.path,
-      '${file.path}_compressed.jpg', // Change the extension if necessary
-      quality: 60, // Adjust the quality as needed (0 to 100)
-    ));
-    File imageFile = File(compressedFile!.path);
-    Reference ref = _storage
-        .ref()
-        .child('dataset/${DateTime.now().millisecondsSinceEpoch}');
-    ref.putFile(imageFile);
-  }
+  // Future<void> _loadModel() async {
+  //   await Tflite.loadModel(
+  //       model: "assets/Model/model.tflite", labels: "assets/Model/label.txt");
+  //   setState(() {
+  //     _modelLoaded = true;
+  //   });
+  // }
 
-  Future<void> _loadModel() async {
-    await Tflite.loadModel(
-        model: "assets/Model/model.tflite", labels: "assets/Model/label.txt");
-    setState(() {
-      _modelLoaded = true;
-    });
-  }
+  // Future<void> _getImageFromCamera() async {
+  //   final picker = ImagePicker();
+  //   final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
-  Future<void> _getImageFromCamera() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+  //   if (pickedFile != null) {
+  //     setState(() {
+  //       _imageFile = File(pickedFile.path);
+  //     });
+  //     compressAndUploadFile(_imageFile!);
+  //     classifyImage(_imageFile!);
+  //   } else {
+  //     return;
+  //   }
+  // }
 
-    if (pickedFile != null) {
-      setState(() {
-        _imageFile = File(pickedFile.path);
-      });
-      compressAndUploadFile(_imageFile!);
-      classifyImage(_imageFile!);
-    } else {
-      return;
-    }
-  }
+  // Future<void> classifyImage(File imageFile) async {
+  //   var output = await Tflite.runModelOnImage(
+  //     path: imageFile.path,
+  //     numResults: 5,
+  //     threshold: 0.5,
+  //     imageMean: 127.5,
+  //     imageStd: 127.5,
+  //   );
+  //   setState(() {
+  //     _output = output;
+  //   });
+  //   if (mounted) {
+  //     Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //             builder: (context) => MyResultPage(
+  //                   output: '${output![0]['label']}',
+  //                   image: _imageFile!,
+  //                 )));
+  //   }
+  // }
 
-  Future<void> classifyImage(File imageFile) async {
-    var output = await Tflite.runModelOnImage(
-      path: imageFile.path,
-      numResults: 5,
-      threshold: 0.5,
-      imageMean: 127.5,
-      imageStd: 127.5,
-    );
-    setState(() {
-      _output = output;
-    });
-    if (mounted) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MyResultPage(
-            output: '${output![0]['label']}',
-            image: _imageFile!,
-          )));
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _loadModel();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _loadModel();
+  // }
 
   @override
   Widget build(context) {
     return Center(
-      child: _modelLoaded
-          ? Container(
+      child: Container(
               color: Colors.white,
               child: Center(
                 child: Column(
@@ -150,27 +148,28 @@ class MyPreDetectState extends State<MyPreDetectPage> {
                       flex: 2,
                     ),
                     MyCostumButtton1(
-                      buttonColor: Theme.of(context).primaryColor,
-                      buttonText: 'Continue',
-                      func: () {
-                        _getImageFromCamera();
-                      }
-                    ),
+                        buttonColor: Theme.of(context).primaryColor,
+                        buttonText: 'Continue',
+                        func: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return const MyDetectRulesPage();
+                          }));
+                        }),
                     const Spacer(
                       flex: 1,
                     ),
                   ],
                 ),
               ))
-          : const CircularProgressIndicator(),
     );
   }
 
-  @override
-  void dispose() {
-    Tflite.close();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   Tflite.close();
+  //   super.dispose();
+  // }
 }
 
 

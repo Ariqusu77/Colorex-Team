@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class MyCostumButtton1 extends StatelessWidget {
   const MyCostumButtton1({
@@ -32,12 +33,45 @@ class MyCostumButtton1 extends StatelessWidget {
             Positioned(
               top: 14,
               right: 6,
+              child: FittedBox(
+                child: Container(
+                  width: (buttonWidth != null) ? buttonWidth! : 270,
+                  decoration: BoxDecoration(
+                    color: (shadowColor != null) ? shadowColor! : Colors.black,
+                    borderRadius:
+                        const BorderRadiusDirectional.all(Radius.circular(8)),
+                  ),
+                  child: Center(
+                      child: Padding(
+                    padding: EdgeInsets.only(bottom: bottomPad, top: topPad),
+                    child: Text(
+                      buttonText,
+                      style: TextStyle(
+                          color: (textColor != null) ? textColor! : Colors.black,
+                          decoration: TextDecoration.none,
+                          fontFamily: 'LeagueSpartan',
+                          fontSize: fontSize,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  )),
+                ),
+              ),
+            ),
+            FittedBox(
               child: Container(
-                width: (buttonWidth != null) ? buttonWidth! : 300,
+                width: (buttonWidth != null) ? buttonWidth! : 270,
+                margin: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: (shadowColor != null) ? shadowColor! : Colors.black,
+                  color: buttonColor,
                   borderRadius:
                       const BorderRadiusDirectional.all(Radius.circular(8)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 2,
+                        offset: const Offset(-0.4, -0.7))
+                  ],
                 ),
                 child: Center(
                     child: Padding(
@@ -53,35 +87,6 @@ class MyCostumButtton1 extends StatelessWidget {
                   ),
                 )),
               ),
-            ),
-            Container(
-              width: (buttonWidth != null) ? buttonWidth! : 300,
-              margin: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: buttonColor,
-                borderRadius:
-                    const BorderRadiusDirectional.all(Radius.circular(8)),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 2,
-                      offset: const Offset(-0.4, -0.7))
-                ],
-              ),
-              child: Center(
-                  child: Padding(
-                padding: EdgeInsets.only(bottom: bottomPad, top: topPad),
-                child: Text(
-                  buttonText,
-                  style: TextStyle(
-                      color: (textColor != null) ? textColor! : Colors.black,
-                      decoration: TextDecoration.none,
-                      fontFamily: 'LeagueSpartan',
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.w400),
-                ),
-              )),
             ),
           ],
         ));
@@ -121,7 +126,7 @@ class MyCostumButttonGoogle extends StatelessWidget {
               top: 14,
               right: 6,
               child: Container(
-                width: (buttonWidth != null) ? buttonWidth! : 300,
+                width: (buttonWidth != null) ? buttonWidth! : 270,
                 decoration: BoxDecoration(
                   color: (shadowColor != null) ? shadowColor! : Colors.black,
                   borderRadius:
@@ -143,7 +148,7 @@ class MyCostumButttonGoogle extends StatelessWidget {
               ),
             ),
             Container(
-              width: (buttonWidth != null) ? buttonWidth! : 300,
+              width: (buttonWidth != null) ? buttonWidth! : 270,
               margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: buttonColor,

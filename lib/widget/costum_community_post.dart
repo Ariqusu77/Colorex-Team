@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:colorex/utils/post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -50,7 +53,8 @@ class _MyCommunityPostState extends State<MyCommunityPost> {
                           fit: BoxFit.contain,
                           child: CircleAvatar(
                             radius: 50,
-                            backgroundImage: NetworkImage(widget.postData.photoURL),
+                            backgroundImage:
+                                NetworkImage(widget.postData.photoURL),
                           ))
                       : Center(
                           child: Text(
@@ -70,10 +74,20 @@ class _MyCommunityPostState extends State<MyCommunityPost> {
                         style: const TextStyle(
                           fontSize: 18,
                           fontFamily: 'LeagueSpartan',
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                      // ! add timestamp -----------------------------------------------------------------<<<<<<<
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text(
+                        "${convertToFloorTime((DateTime.now().millisecondsSinceEpoch - widget.postData.timeStamp) ~/ 1000)} yang lalu",
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontFamily: 'LeagueSpartan',
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
                     ],
                   ),
                   Text(
@@ -90,7 +104,8 @@ class _MyCommunityPostState extends State<MyCommunityPost> {
             ],
           ),
           Visibility(
-            visible: widget.postData.caption.isNotEmpty, // Show the SizedBox only if caption length is not zero
+            visible: widget.postData.caption
+                .isNotEmpty, // Show the SizedBox only if caption length is not zero
             child: Column(
               children: [
                 Container(
@@ -128,16 +143,27 @@ class _MyCommunityPostState extends State<MyCommunityPost> {
               ],
             ),
           ),
+          Visibility(
+            visible: widget.postData.contentImage,
+            child: Image.network(widget.postData.contentImageURL),
+          ),
+          const SizedBox(
+            height: 12,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Text(
-              widget.postData.content,
-              overflow: TextOverflow.clip,
-              style: const TextStyle(
-                fontFamily: "LeagueSpartan",
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-              ),
+            child: Row(
+              children: [
+                Text(
+                  widget.postData.content,
+                  overflow: TextOverflow.clip,
+                  style: const TextStyle(
+                    fontFamily: "LeagueSpartan",
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(

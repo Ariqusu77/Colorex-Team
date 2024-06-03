@@ -1,5 +1,10 @@
+import 'package:colorex/model/post.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'subpages/newpostpage.dart';
+
+import 'package:colorex/widget/costum_community_post.dart';
 
 class MyCommunityFeedPage extends StatefulWidget {
   const MyCommunityFeedPage({super.key});
@@ -9,40 +14,36 @@ class MyCommunityFeedPage extends StatefulWidget {
 }
 
 class _MyCommunityFeedPageState extends State<MyCommunityFeedPage> {
+  
+  Future<void> _refresh() async {
+
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: 9, // Number of vertical items
-        itemBuilder: (context, index) {
-          return Container();
-          // return Container(
-          //   height: 200,
-          //   child: ListView.builder(
-          //     scrollDirection: Axis.horizontal,
-          //     itemCount: 10, // Number of horizontal items
-          //     itemBuilder: (context, index) {
-          //       return Container(
-          //         width: 100,
-          //         color: Colors.blue,
-          //         margin: EdgeInsets.all(5),
-          //         child: Center(
-          //           child: Text(
-          //             'Item $index',
-          //             style: TextStyle(color: Colors.white),
-          //           ),
-          //         ),
-          //       );
-          //     },
-          //   ),
-          // );
-        },
-      ),
+      body: RefreshIndicator(
+        onRefresh: _refresh,
+        child: Consumer<MyPostDataManager>(
+          builder: (context, posting, _ ) => ListView.builder(
+          itemCount: posting.communityPost.length, // Number of vertical items
+          itemBuilder: (context, index) {
+            return MyCommunityPost(postData: posting.communityPost[index]);
+          },
+        ),
+        ),
+      ), 
+      
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const MyCreatePostPage())
-          );
+            context,
+            MaterialPageRoute(
+                builder: (context) => const MyCreatePostPage())).then((_) {
+                  setState(() {
+                    
+                  });
+                });
         },
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add),

@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:colorex/model/user.dart';
+import 'package:colorex/model/post.dart';
+import 'package:colorex/utils/post.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -22,6 +24,7 @@ class _MyCreatePostPageState extends State<MyCreatePostPage> {
 
   File? _imageFile;
   bool image = false;
+  bool link = false;
 
   Future<void> _getImageFromGalery() async {
     final picker = ImagePicker();
@@ -58,16 +61,30 @@ class _MyCreatePostPageState extends State<MyCreatePostPage> {
 
   Future<String> uploadImageToFirebaseStorage(File imageFile) async {
     try {
+      // Compress the image file
+      XFile? compressedImage = await FlutterImageCompress.compressAndGetFile(
+        imageFile.path,
+        '${imageFile.path}_compressed.jpg', // Change the extension if necessary
+        quality: 50, // Adjust the quality as needed (0 to 100)
+      );
+
+      if (compressedImage == null) {
+        throw Exception("Image compression failed.");
+      }
+
       // Create a reference to the storage location with a unique filename
       Reference ref = FirebaseStorage.instance
           .ref()
-          .child('Post_Photo/${hashAnything(imageFile)}');
+          .child('Post_Photo/${hashAnything(compressedImage.path)}');
 
       // Upload the file to Firebase Storage
-      await ref.putFile(imageFile);
+      await ref.putFile(File(compressedImage.path));
 
       // Get the download URL of the uploaded image
       String downloadURL = await ref.getDownloadURL();
+      if (kDebugMode) {
+        print("uploaded image in Firebase Storage: $downloadURL");
+      }
 
       return downloadURL; // Return the download URL
     } catch (e) {
@@ -78,8 +95,33 @@ class _MyCreatePostPageState extends State<MyCreatePostPage> {
     }
   }
 
+  void postThePost(
+      BuildContext context, MyPostDataManager postDataManager) async {
+    String url = '';
+    if (image) {
+      url = await uploadImageToFirebaseStorage(_imageFile!);
+    }
+
+    // ignore: use_build_context_synchronously
+    MyPostData postData = MyPostData(context, {
+      "Content": myContentController.text,
+      "includeImage": image,
+      "Content_Image_URL": url,
+      "includeLink": link,
+    });
+
+    postDataManager.adddata(postData);
+
+    addNewPost(postData.toMap(), postData.postID);
+
+    // ignore: use_build_context_synchronously
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
+    MyPostDataManager postDataManager =
+        Provider.of<MyPostDataManager>(context, listen: false);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
@@ -97,7 +139,8 @@ class _MyCreatePostPageState extends State<MyCreatePostPage> {
           ),
         ),
         body: Container(
-          constraints: BoxConstraints(maxHeight: 0.85* MediaQuery.of(context).size.height),
+            constraints: BoxConstraints(
+                maxHeight: 0.85 * MediaQuery.of(context).size.height),
             padding: const EdgeInsets.symmetric(horizontal: 24),
             color: const Color.fromRGBO(246, 246, 246, 1.0),
             child: ListView(
@@ -107,7 +150,8 @@ class _MyCreatePostPageState extends State<MyCreatePostPage> {
                     Visibility(
                       visible: image, // Check if imageFile is not null
                       child: Container(
-                        child: _imageFile != null ? Image.file(_imageFile!) : null,
+                        child:
+                            _imageFile != null ? Image.file(_imageFile!) : null,
                       ),
                     ),
                     Container(
@@ -137,9 +181,14 @@ class _MyCreatePostPageState extends State<MyCreatePostPage> {
                           ),
                         ),
                         const Spacer(),
-                        const Icon(
-                          Icons.send,
-                          size: 30,
+                        GestureDetector(
+                          onTap: () {
+                            postThePost(context, postDataManager);
+                          },
+                          child: const Icon(
+                            Icons.send,
+                            size: 30,
+                          ),
                         )
                       ],
                     ),

@@ -11,14 +11,20 @@ class MyPostData {
     postID = hashAnything(data);
     timeStamp = DateTime.now().millisecondsSinceEpoch;
 
-    MyUserData userDataProvider = Provider.of<MyUserData>(context);
+    MyUserData userDataProvider =
+        Provider.of<MyUserData>(context, listen: false);
     caption = extractCaptions(data["Content"]);
+    userID = userDataProvider.userID!;
     userName = userDataProvider.userName!;
     photoURL = userDataProvider.photoURL!;
     season = userDataProvider.season;
 
     content = data["Content"];
     contentImageURL = data["includeImage"] ? data["Content_Image_URL"] : '';
+    contentLinkURL = data["includeLink"] ? data["Content_Link_URL"] : '';
+
+    contentImage = data["includeImage"];
+    contentLink = data["includeLink"];
   }
 
   String postID = '';
@@ -41,10 +47,35 @@ class MyPostData {
   int bookmark = 0;
   int comment = 0;
 
+  bool isLiked = false;
+  bool isBookmarked = false;
+  bool isCommented = false;
+
   List<DocumentReference> commentList = [];
   List<String> caption = [];
 
   // ? awal dari para fungsi ---------------------------------------------------------------- <<<<<<
+  Map<String, dynamic> toMap() {
+    return {
+      'Post_ID': postID,
+      'User_ID': userID,
+      'Time_Stamp': timeStamp,
+      'UserName': userName,
+      'Season': season,
+      'Photo_URL': photoURL,
+      'Content': content,
+      'Content_Image': contentImage,
+      'Content_Image_URL': contentImageURL,
+      'Content_Link': contentLink,
+      'Content_Link_URL': contentLinkURL,
+      'Like': like,
+      'Bookmark': bookmark,
+      'Comment': comment,
+      'Comment_List': commentList.map((comment) => comment.path).toList(),
+      'Caption': caption,
+    };
+  }
+
   List<String> extractCaptions(String mainString) {
     List<String> substrings = [];
 
@@ -93,6 +124,21 @@ class MyPostData {
     }
   }
 
+  void decreaseLike() async {
+    try {
+      DocumentReference documentReference =
+          FirebaseFirestore.instance.collection('Post').doc(postID);
+      await documentReference.update({
+        'Like': FieldValue.increment(-1),
+      });
+      like -= 1;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error incrementing data: $e');
+      }
+    }
+  }
+
   void increaseBookmark() async {
     try {
       DocumentReference documentReference =
@@ -101,6 +147,21 @@ class MyPostData {
         'Bookmark': FieldValue.increment(1),
       });
       bookmark += 1;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error incrementing data: $e');
+      }
+    }
+  }
+
+  void decreaseBookmark() async {
+    try {
+      DocumentReference documentReference =
+          FirebaseFirestore.instance.collection('Post').doc(postID);
+      await documentReference.update({
+        'Bookmark': FieldValue.increment(-1),
+      });
+      bookmark -= 1;
     } catch (e) {
       if (kDebugMode) {
         print('Error incrementing data: $e');
@@ -122,10 +183,30 @@ class MyPostData {
       }
     }
   }
+
+  void decreaseComment() async {
+    try {
+      DocumentReference documentReference =
+          FirebaseFirestore.instance.collection('Post').doc(postID);
+      await documentReference.update({
+        'Comment': FieldValue.increment(-1),
+      });
+      comment -= 1;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error incrementing data: $e');
+      }
+    }
+  }
 }
 
 class MyPostDataManager extends ChangeNotifier {
   List<MyPostData> profilePost = [];
   List<MyPostData> communityPost = [];
   List<MyPostData> bookmarkPost = [];
+
+  void adddata(MyPostData data) {
+    communityPost = [data, ...communityPost];
+    notifyListeners();
+  }
 }

@@ -1,13 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'subpages/homepage.dart';
+//import 'subpages/homepage.dart';
 //import 'subpages/feedpage.dart';
-// import 'subpages/bookmarkpage.dart';
-import 'subpages/chatpage.dart';
+//import 'subpages/bookmarkpage.dart';
+//import 'subpages/chatpage.dart';
 import 'subpages/profilepage.dart';
 import 'subpages/testpage.dart';
 import 'package:colorex/testwidget/usertest.dart';
+import 'package:colorex/landingpage/landingpage.dart';
 
 import 'package:colorex/detectpage/predetectpage.dart';
 import 'package:colorex/communitypage/communitypage.dart';
@@ -35,10 +37,11 @@ class MyHomePageState extends State<MyHomePage> {
   final String vectorColorex = "lib/homepage/asset/svg/Vector_Colorex.svg";
 
   static const List<Widget> _widgetOptions = <Widget>[
-    MyCommunityPage(),
+    // MyCommunityPage(),
+    MyLandingPage(),
     MyPreDetectPage(),
     // MyBookmarkPage(),
-    //MyChatPage(),
+    // MyChatPage(),
     MyCommunityFeedPage(),
     MyProfilePage(),
     MyTestPage(),
@@ -110,10 +113,11 @@ class MyHomePageState extends State<MyHomePage> {
               icon: SvgPicture.asset(vectorUser, height: 25),
               label: 'Profile',
             ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'in build',
-            )
+            if (kDebugMode)
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: 'in build',
+              ),
           ],
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
