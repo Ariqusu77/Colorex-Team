@@ -22,8 +22,8 @@ class ArticleCard extends StatelessWidget {
             ),
             child: Image.network(
               imageUrl,
-              width: 300,
-              height: 150,
+              width: 150,
+              height: 170,
               fit: BoxFit.cover,
             ),
           ),

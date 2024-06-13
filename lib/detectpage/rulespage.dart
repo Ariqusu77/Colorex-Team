@@ -1,6 +1,7 @@
 import 'dart:io';
 //import 'dart:math';
 
+import 'package:colorex/widget/costum_background2.dart';
 import 'package:colorex/widget/costum_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -10,6 +11,10 @@ import 'package:face_camera/face_camera.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import 'resultpage/autumnresult.dart';
+import 'resultpage/winterresult.dart';
+import 'resultpage/springresult.dart';
+import 'resultpage/summerresult.dart';
+
 
 class MyDetectRulesPage extends StatefulWidget {
   const MyDetectRulesPage({super.key});
@@ -56,12 +61,12 @@ class _MyDetectRulesPageState extends State<MyDetectRulesPage> {
       switch (_output![0]['label']) {
         case 'Summer':
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const MyAutumnResultPage();
+            return const MySummerResultPage();
           }));
           break;
         case 'Spring':
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const MyAutumnResultPage();
+            return const MySpringResultPage();
           }));
           break;
         case 'Autumn':
@@ -71,7 +76,7 @@ class _MyDetectRulesPageState extends State<MyDetectRulesPage> {
           break;
         case 'Winter':
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const MyAutumnResultPage();
+            return const MyWinterResultPage();
           }));
           break;
         default:
@@ -205,82 +210,143 @@ class MyRulesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        children: [
-          const SizedBox(height: 12,),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
+      children: [
+        Column(
+          children: [
+            const SizedBox(
+              height: 24,
+            ),
+            const MyBackground2(),
+            Expanded(
+              child: Container(
+                color: Theme.of(context).primaryColor,
+                height: 300,
+              ),
+            )
+          ],
+        ),
+        Column(
+          children: [
+            const SizedBox(
+              height: 100,
+            ),
+            Expanded(
+              child: Container(
+                color: Theme.of(context).primaryColor,
+                height: MediaQuery.of(context).size.height - 100,
+              ),
+            )
+          ],
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
             children: [
-              Center(
-                child: Text(
-                  "Rules",
-                  style: TextStyle(
-                    fontFamily: 'LeagueSpartan',
-                    fontSize: 28, 
-                    height: 1.5, 
-                    fontWeight: FontWeight.w700
+              const SizedBox(height: 12,),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Text(
+                      "Rules",
+                      style: TextStyle(
+                        fontFamily: 'LeagueSpartan',
+                        fontSize: 28, 
+                        height: 1.5, 
+                        fontWeight: FontWeight.w700
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 50,),
+              const Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "1.  ",
+                    style: TextStyle(
+                      fontFamily: 'LeagueSpartan',
+                      fontSize: 18, 
+                      fontWeight: FontWeight.w500
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
-          const Row(
-            children: [
-              Expanded(
-                child: Text(
-                  "1. Patikan kamu berada di tempat yang terang",
-                  overflow: TextOverflow.clip,
-                  style: TextStyle(
-                    fontFamily: 'LeagueSpartan',
-                    fontSize: 16, 
-                    fontWeight: FontWeight.w500
+                  Expanded(
+                    child: Text(
+                      "Patikan kamu berada di tempat yang terang",
+                      overflow: TextOverflow.clip,
+                      style: TextStyle(
+                        fontFamily: 'LeagueSpartan',
+                        fontSize: 18, 
+                        fontWeight: FontWeight.w500
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
-          const Row(
-            children: [
-              Expanded(
-                child: Text(
-                  "2. ",
-                  style: TextStyle(
-                    fontFamily: 'LeagueSpartan',
-                    fontSize: 16, 
-                    fontWeight: FontWeight.w500
+              const SizedBox(height: 12,),
+              const Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "2.  ",
+                    style: TextStyle(
+                      fontFamily: 'LeagueSpartan',
+                      fontSize: 18, 
+                      fontWeight: FontWeight.w500
+                    ),
                   ),
-                ),
+                  Expanded(
+                    child: Text(
+                      "Pastikan wajahmu tidak tertutup oleh kacamata, rambut atau aksesoris lainnya",
+                      overflow: TextOverflow.clip,
+                      style: TextStyle(
+                        fontFamily: 'LeagueSpartan',
+                        fontSize: 18, 
+                        fontWeight: FontWeight.w500
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: Text(
-                  "Pastikan wajahmu tidak tertutup oleh kacamata, rambut atau aksesoris lainnya",
-                  overflow: TextOverflow.clip,
-                ),
+              const SizedBox(height: 12,),
+              const Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "3.  ",
+                    style: TextStyle(
+                      fontFamily: 'LeagueSpartan',
+                      fontSize: 18, 
+                      fontWeight: FontWeight.w500
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Mohon untuk tidak bergerak saat pengambilan foto wajah",
+                      overflow: TextOverflow.clip,
+                      style: TextStyle(
+                        fontFamily: 'LeagueSpartan',
+                        fontSize: 18, 
+                        fontWeight: FontWeight.w500
+                      ),
+                    ),
+                  ),
+                ],
               ),
+              const Spacer(),
+              MyCostumButtton1(
+                  buttonColor: Colors.white,
+                  buttonText: "Continue",
+                  func: func
+              ),
+              const SizedBox(height: 24,)
             ],
           ),
-          const Row(
-            children: [
-              Expanded(
-                child: Text(
-                  "3. Mohon untuk tidak bergerak saat pengambilan foto wajah",
-                  overflow: TextOverflow.clip,
-                ),
-              ),
-            ],
-          ),
-          const Spacer(),
-          MyCostumButtton1(
-              buttonColor: Theme.of(context).primaryColor,
-              buttonText: "Continue",
-              func: func
-          ),
-          const SizedBox(height: 24,)
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

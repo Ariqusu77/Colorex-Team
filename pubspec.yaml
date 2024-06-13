@@ -101,6 +101,7 @@ flutter:
     - lib/splashpage/assets/Vector_Colorex.svg
     - lib/homepage/asset/svg/Vector_Colorex.svg
     - assets/Model/model.tflite
+    - assets/Model/model-nadya.tflite
     - assets/Model/label.txt
 
   #   - images/a_dot_burr.jpeg

@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 // import 'package:colorex/widget/costum_background.dart';
 // import 'package:colorex/widget/costum_background2.dart';
 import 'package:colorex/detectpage/resultpage/autumnresult.dart';
+import 'package:colorex/detectpage/resultpage/springresult.dart';
+import 'package:colorex/detectpage/resultpage/summerresult.dart';
+import 'package:colorex/detectpage/resultpage/winterresult.dart';
+import 'package:colorex/widget/costum_button.dart';
+
 import 'package:colorex/detectpage/rulespage.dart';
 // import 'package:colorex/widget/costum_textfield.dart';
 // import 'package:colorex/widget/costum_community_post.dart';
@@ -47,40 +52,41 @@ class MyTestPage extends StatelessWidget {
           // }
           // )
           //MyBackground2(),
-          FloatingActionButton(
-            onPressed: () {
+          MyCostumButtton1(
+            buttonColor: Theme.of(context).primaryColor, 
+            buttonText: "Autumn Result", 
+            func:  () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const MyAutumnResultPage()));
+                MaterialPageRoute(builder: (context) => const MyAutumnResultPage()));
             },
           ),
-          const Text('autumn result'),
-          const SizedBox(height: 12,),
-          FloatingActionButton(
-            onPressed: () {
+          const SizedBox(height: 24,),
+          MyCostumButtton1(
+            buttonColor: Theme.of(context).primaryColor, 
+            buttonText: "Winter Result", 
+            func:  () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const MyCreatePostPage()));
+                MaterialPageRoute(builder: (context) => const MyWinterResultPage()));
             },
           ),
-          const Text('new post page'),
-          const SizedBox(height: 12,),
-          FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const CameraTesting2()));
+          const SizedBox(height: 24,),
+          MyCostumButtton1(
+            buttonColor: Theme.of(context).primaryColor, 
+            buttonText: "Spring Result", 
+            func:  () {
+              Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const MySpringResultPage()));
             },
           ),
-          const Text('Camera Preview'),
-          const SizedBox(height: 12,),
-          FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyDetectRulesPage()));
+          const SizedBox(height: 24,),
+          MyCostumButtton1(
+            buttonColor: Theme.of(context).primaryColor, 
+            buttonText: "Summer Result", 
+            func:  () {
+              Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const MySummerResultPage()));
             },
           ),
-          const Text('Camera Preview'),
-          const SizedBox(height: 12,),
           // const CameraPreviewWidget(),
         ],
       ),

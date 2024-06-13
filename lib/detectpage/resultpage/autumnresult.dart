@@ -20,16 +20,16 @@ class MyAutumnResultPage extends StatelessWidget {
   ];
 
   final List<int> autumnPalette1 = const [
-    0xffe6d19b,
-    0xffc8bc87,
-    0xff9b8e1c,
-    0xff507d28,
-    0xff00451e,
-    0xff924b2a,
-    0xff5d544c,
+    0xffE6D19B,
+    0xffDBB52C,
+    0xff5B6037,
+    0xff0E361C,
     0xff235972,
-    0xff01807e,
-    0xff17a38a,
+    0xff503136,
+    0xff5C2317,
+    0xff7C4D3A,
+    0xff993324,
+    0xff7C2529,
   ];
 
   final List<int> autumnPalette2 = const [
@@ -241,134 +241,134 @@ class MyAutumnResultPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              const Row(
-                                children: [
-                                  Text(
-                                    "Fashion Recomendation",
-                                    style: TextStyle(
-                                        color:
-                                            Colors.black, // Default text color
-                                        fontSize: 15.0,
-                                        fontFamily:
-                                            "LeagueSpartan" // Default font size
-                                        ),
-                                  ),
-                                ],
-                              ),
-                              Stack(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(vertical: 24),
-                                        height: 250,
-                                        width: 100,
-                                        child: Column(
-                                          children: [
-                                            const SizedBox(height: 24,),
-                                            ...createColors(autumnOutfit)
-                                          ],
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 6,
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Image.network(
-                                          outfitLink,
-                                          fit: BoxFit.fitWidth,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 36,
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              const Row(
-                                children: [
-                                  Text(
-                                    "Warm",
-                                    style: TextStyle(
-                                      color:
-                                          Colors.black, // Default text color
-                                      fontSize: 15.0,
-                                      fontFamily:
-                                          "LeagueSpartan" // Default font size
-                                      ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children:
-                                    createColors(autumnPalette2.sublist(0, 5)),
-                              ),
-                              Row(
-                                children:
-                                    createColors(autumnPalette2.sublist(5, 10)),
-                              ),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              const Row(
-                                children: [
-                                  Text(
-                                    "Cool",
-                                    style: TextStyle(
-                                      color:
-                                          Colors.black, // Default text color
-                                      fontSize: 15.0,
-                                      fontFamily:
-                                          "LeagueSpartan" // Default font size
-                                      ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children:
-                                    createColors(autumnPalette3.sublist(0, 5)),
-                              ),
-                              Row(
-                                children:
-                                    createColors(autumnPalette3.sublist(5, 10)),
-                              ),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              const Row(
-                                children: [
-                                  Text(
-                                    "Neutral",
-                                    style: TextStyle(
-                                      color:
-                                          Colors.black, // Default text color
-                                      fontSize: 15.0,
-                                      fontFamily:
-                                          "LeagueSpartan" // Default font size
-                                      ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children:
-                                    createColors(autumnPalette4.sublist(0, 5)),
-                              ),
-                              Row(
-                                children:
-                                    createColors(autumnPalette4.sublist(5, 10)),
-                              ),
+                              // const SizedBox(
+                              //   height: 24,
+                              // ),
+                              // const Row(
+                              //   children: [
+                              //     Text(
+                              //       "Fashion Recomendation",
+                              //       style: TextStyle(
+                              //           color:
+                              //               Colors.black, // Default text color
+                              //           fontSize: 15.0,
+                              //           fontFamily:
+                              //               "LeagueSpartan" // Default font size
+                              //           ),
+                              //     ),
+                              //   ],
+                              // ),
+                              // Stack(
+                              //   children: [
+                              //     Row(
+                              //       mainAxisAlignment: MainAxisAlignment.end,
+                              //       children: [
+                              //         Container(
+                              //           padding: const EdgeInsets.symmetric(vertical: 24),
+                              //           height: 250,
+                              //           width: 100,
+                              //           child: Column(
+                              //             children: [
+                              //               const SizedBox(height: 24,),
+                              //               ...createColors(autumnOutfit)
+                              //             ],
+                              //           ),
+                              //         ),
+                              //         const SizedBox(
+                              //           width: 6,
+                              //         )
+                              //       ],
+                              //     ),
+                              //     Row(
+                              //       children: [
+                              //         Expanded(
+                              //           child: Image.network(
+                              //             outfitLink,
+                              //             fit: BoxFit.fitWidth,
+                              //           ),
+                              //         ),
+                              //         const SizedBox(
+                              //           width: 36,
+                              //         )
+                              //       ],
+                              //     ),
+                              //   ],
+                              // ),
+                              // const SizedBox(
+                              //   height: 24,
+                              // ),
+                              // const Row(
+                              //   children: [
+                              //     Text(
+                              //       "Warm",
+                              //       style: TextStyle(
+                              //         color:
+                              //             Colors.black, // Default text color
+                              //         fontSize: 15.0,
+                              //         fontFamily:
+                              //             "LeagueSpartan" // Default font size
+                              //         ),
+                              //     ),
+                              //   ],
+                              // ),
+                              // Row(
+                              //   children:
+                              //       createColors(autumnPalette2.sublist(0, 5)),
+                              // ),
+                              // Row(
+                              //   children:
+                              //       createColors(autumnPalette2.sublist(5, 10)),
+                              // ),
+                              // const SizedBox(
+                              //   height: 24,
+                              // ),
+                              // const Row(
+                              //   children: [
+                              //     Text(
+                              //       "Cool",
+                              //       style: TextStyle(
+                              //         color:
+                              //             Colors.black, // Default text color
+                              //         fontSize: 15.0,
+                              //         fontFamily:
+                              //             "LeagueSpartan" // Default font size
+                              //         ),
+                              //     ),
+                              //   ],
+                              // ),
+                              // Row(
+                              //   children:
+                              //       createColors(autumnPalette3.sublist(0, 5)),
+                              // ),
+                              // Row(
+                              //   children:
+                              //       createColors(autumnPalette3.sublist(5, 10)),
+                              // ),
+                              // const SizedBox(
+                              //   height: 24,
+                              // ),
+                              // const Row(
+                              //   children: [
+                              //     Text(
+                              //       "Neutral",
+                              //       style: TextStyle(
+                              //         color:
+                              //             Colors.black, // Default text color
+                              //         fontSize: 15.0,
+                              //         fontFamily:
+                              //             "LeagueSpartan" // Default font size
+                              //         ),
+                              //     ),
+                              //   ],
+                              // ),
+                              // Row(
+                              //   children:
+                              //       createColors(autumnPalette4.sublist(0, 5)),
+                              // ),
+                              // Row(
+                              //   children:
+                              //       createColors(autumnPalette4.sublist(5, 10)),
+                              // ),
                               const SizedBox(
                                 height: 24,
                               ),

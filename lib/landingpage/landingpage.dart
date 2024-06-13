@@ -61,7 +61,7 @@ class MyLandingPage extends StatelessWidget {
                 const SizedBox(height: 600,),
                 Container(
                     color: Theme.of(context).primaryColor,
-                    height: 360,
+                    height: 570,
                 ),
               ],
             ),
@@ -217,7 +217,7 @@ class MyLandingPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Seasonal Colour',
+                                  'Article for You',
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'LeagueSpartan',
@@ -237,7 +237,7 @@ class MyLandingPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Seasonal Colour',
+                                  'Outfit of the Day',
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'LeagueSpartan',
@@ -249,7 +249,7 @@ class MyLandingPage extends StatelessWidget {
                             const SizedBox(
                               height: 12,
                             ),
-                            //MyArticleWidget(),
+                            MyArticleWidget(),
                             const SizedBox(
                               height: 12,
                             ),

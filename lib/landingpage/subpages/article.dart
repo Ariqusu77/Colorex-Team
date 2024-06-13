@@ -9,19 +9,23 @@ class MyArticleWidget extends StatelessWidget {
     {"link": "https://colorwise.me/images/misc/self-test.a2217fcb.png", "title": "You're a natural beauty"},
     {"link": "https://colorwise.me/images/misc/self-test.a2217fcb.png", "title": "You're a natural beauty"},
     {"link": "https://colorwise.me/images/misc/self-test.a2217fcb.png", "title": "You're a natural beauty"},
+    {"link": "https://colorwise.me/images/misc/self-test.a2217fcb.png", "title": "You're a natural beauty"},
   ];
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: data.length,
-      itemBuilder: (context, index) {
-        return ArticleCard(
-          imageUrl: data[index]["link"],
-          title: data[index]["title"],
-        );
-      }
+    return Container(
+      height: 250,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          return ArticleCard(
+            imageUrl: data[index]["link"],
+            title: data[index]["title"],
+          );
+        }
+      ),
     );
   }
 }

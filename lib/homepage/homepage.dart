@@ -42,7 +42,7 @@ class MyHomePageState extends State<MyHomePage> {
     MyPreDetectPage(),
     // MyBookmarkPage(),
     // MyChatPage(),
-    MyCommunityFeedPage(),
+    // MyCommunityFeedPage(),
     MyProfilePage(),
     MyTestPage(),
     MyUserTest(),
@@ -105,15 +105,15 @@ class MyHomePageState extends State<MyHomePage> {
               icon: SvgPicture.asset(vectorKamera, height: 25),
               label: 'Persona',
             ),
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset(vectorChat, height: 25),
-              label: 'Community',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: SvgPicture.asset(vectorChat, height: 25),
+            //   label: 'Community',
+            // ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(vectorUser, height: 25),
               label: 'Profile',
             ),
-            if (kDebugMode)
+           // if (kDebugMode)
               const BottomNavigationBarItem(
                 icon: Icon(Icons.settings),
                 label: 'in build',
